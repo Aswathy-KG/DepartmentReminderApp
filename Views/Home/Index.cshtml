@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<h2 class="text-center mb-4">Welcome to DepartmentReminder</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title">Departments</h5>
+                <p class="card-text">Total Departments: <span class="font-weight-bold">@ViewData["DepartmentCount"]</span></p>
+                <a href="@Url.Action("Index", "Department")" class="btn btn-primary">View Departments</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title">Reminders</h5>
+                <p class="card-text">Total Reminders: <span class="font-weight-bold">@ViewData["ReminderCount"]</span></p>
+                <a href="@Url.Action("Index", "Reminder")" class="btn btn-primary">View Reminders</a>
+            </div>
+        </div>
+    </div>
+</div>

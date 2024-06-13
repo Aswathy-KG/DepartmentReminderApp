@@ -1,0 +1,84 @@
+﻿@model IEnumerable<DepartmentReminderApp.Models.Department>
+
+<h2>Departments</h2>
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Department Name</th>
+            <th>Logo</th>
+            <th>Parent Department</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.DepartmentName</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.DepartmentLogo))
+                    {
+                        <img src="~/uploads/@item.DepartmentLogo" alt="Logo" class="img-thumbnail" style="width:50px;height:50px;" />
+                    }
+                </td>
+                <td>
+                    @item.ParentDepartment?.DepartmentName
+                </td>
+                <td>
+                    <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@item.DepartmentId">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                    <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@item.DepartmentId">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.DepartmentId">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
+            </tr>
+            @if (item.SubDepartments.Any())
+            {
+                <tr>
+                    <td colspan="4">
+                        <table class="table table-bordered table-striped">
+                            <tbody>
+                                @foreach (var subDept in item.SubDepartments)
+                                {
+                                    <tr>
+                                        <td>@subDept.DepartmentName</td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(subDept.DepartmentLogo))
+                                            {
+                                                <img src="~/uploads/@subDept.DepartmentLogo" alt="Logo" class="img-thumbnail" style="width:50px;height:50px;" />
+                                            }
+                                        </td>
+                                        <td>
+                                            @subDept.ParentDepartment?.DepartmentName
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-info btn-sm" asp-action="Details" asp-route-id="@subDept.DepartmentId">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                            <a class="btn btn-warning btn-sm" asp-action="Edit" asp-route-id="@subDept.DepartmentId">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@subDept.DepartmentId">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

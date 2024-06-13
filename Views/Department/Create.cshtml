@@ -1,0 +1,38 @@
+﻿@model DepartmentReminderApp.Models.Department
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Create Department</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="DepartmentName" class="control-label"></label>
+                <input asp-for="DepartmentName" class="form-control" placeholder="Enter Department Name" />
+                <span asp-validation-for="DepartmentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartmentLogoFile" class="control-label"></label>
+                <input asp-for="DepartmentLogoFile" type="file" class="form-control" />
+                <span asp-validation-for="DepartmentLogoFile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ParentDepartmentId" class="control-label"></label>
+                <select asp-for="ParentDepartmentId" class="form-control" asp-items="ViewBag.Departments"></select>
+                <span asp-validation-for="ParentDepartmentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary ml-2"><i class="fas fa-arrow-left"></i> Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js"></script>
+}

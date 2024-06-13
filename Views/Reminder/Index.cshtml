@@ -1,0 +1,50 @@
+﻿@model IEnumerable<DepartmentReminderApp.Models.Reminder>
+
+<h2>Reminders</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                <a asp-action="Create" class="btn btn-primary">Create New </a>
+            </p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date Time</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                            <td>@item.DateTime.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>@item.Email</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ReminderId" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                <a class="btn btn-danger btn-sm" asp-action="Delete" asp-route-id="@item.ReminderId">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+@* JavaScript function to confirm delete action *@
+<script>
+    function deleteReminder(reminderId) {
+        if (confirm('Are you sure you want to delete this reminder?')) {
+            window.location.href = '/Reminder/Delete/' + reminderId;
+        }
+    }
+</script>
